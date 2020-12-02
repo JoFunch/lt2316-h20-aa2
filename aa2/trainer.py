@@ -78,7 +78,11 @@ class Trainer:
         criterion = nn.CrossEntropyLoss()
         optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)  
 
-
+        for split in train_batches:
+            tot_loss = 0
+            for batch in split:
+                optimizer.zero_grad()
+                
 
 
     def test(self, test_X, test_y, model_class, best_model_path):
