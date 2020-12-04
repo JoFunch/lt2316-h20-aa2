@@ -78,11 +78,25 @@ class Trainer:
         criterion = nn.CrossEntropyLoss()
         optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)  
 
-        for split in train_batches:
-            
-            tot_loss = 0
-            for batch in split:
-                optimizer.zero_grad()
+        #train
+        for epoch in range(num_epochs):
+            for split in train_batches:
+                model.train()                
+                tot_loss = 0
+                for batch in split:
+                    optimizer.zero_grad()
+
+                    #forward
+                    output = model(something)
+                    loss = criterion(output, labels)
+
+                    #backwards
+                    optimizer.zero_grad()
+                    loss.backwards()
+                    optimizer.step()
+
+                    epoch += 1
+                    print(epoch)
 
 
 
